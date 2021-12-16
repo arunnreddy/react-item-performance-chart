@@ -1,0 +1,26 @@
+.footer-container {
+    background-color: red;
+    height: 50px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    z-index: 33;
+    // width: 100% !important;
+    // height: 100px !important ;
+    display: flex;
+    align-items: center;
+    
+  }
+  .footer-inner-container {
+    display: flex;
+    justify-content: space-between;
+    
+  }
+  .buttontx {
+    color: #ffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    font-size: 12px;
+  }
