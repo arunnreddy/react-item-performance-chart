@@ -8,10 +8,8 @@ import {
 } from 'react-bootstrap';
 import './style.scss';
 
-
 const Header: React.FC = () => {
     
-
     return (
         <Fragment>
            <div className="shop-container">

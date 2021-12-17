@@ -1,0 +1,20 @@
+.search-listbox-container {
+    width: 92%;
+    // max-width: 49%;
+    border: 1px solid rgb(129, 126, 126);
+    height: 200px;
+    position: absolute;
+    background-color: #1d1818;
+    overflow-y: scroll;
+    align-self: center;
+    z-index: 100;
+    border-radius: 5px;
+  }
+  .search-list {
+    cursor: pointer;
+    padding: 5px 0px 5px 10px;
+    margin: 1px 0px 1px 0px;
+  }
+  .search-list-text {
+      color: #ffff;
+  }

@@ -9,12 +9,15 @@ import { Container } from "react-bootstrap";
 import "./style.scss";
 import TutorialDataService from "../../Api/ApiCall";
 import ItemListGrid from "../../Components/ItemListGrid";
+import { ItemInputSearchBox } from "../../Components/ItemInputSearchBox";
+import SearchBarItemList from "../../Components/SearchBarItemList";
 
 const Items: React.FC = () => {
-  const [movieCategories, setMovieCategories] = useState<any[]>([]);
-  const [getScreenWidth, setGetScreenWidth] = useState<number>(
-    window.innerWidth
-  );
+  const [Categories, setCategories] = useState<any[]>([]);
+  const [CategoryItems, setCategoryItems] = useState<any[]>([]);
+  const [searchCategoryItems, setsearchCategoryItems] = useState<any[]>([]);
+  const [getScreenWidth, setGetScreenWidth] = useState<number>(window.innerWidth);
+  const [IsSearchValue, setIsSearchValue] = useState<boolean>(false);
 
   useEffect(() => {
     window.addEventListener("resize", handleResize);
@@ -32,20 +35,49 @@ const Items: React.FC = () => {
   const getCategoriesData = () => {
     TutorialDataService.getAll().then(res => {
       console.log('Response data ==> ', res.data);
-      setMovieCategories(res.data)
+      setCategories(res.data);
+      setCategoryItems(res.data);
     }).catch(err => {
       console.log('Error  ==> ', err);
     });
   };
+
+  const handleInput = (val: string) => {
+    let cetagories = Categories.filter(item => {
+      if (item.title.toLowerCase().match(val.toLowerCase())) {
+        return item;
+      }
+    });
+    // console.log('cetagories  ==> ', cetagories);
+    setsearchCategoryItems(cetagories);
+    if ((cetagories.length > 0) && val) {
+      setIsSearchValue(true)
+    } else {
+      setIsSearchValue(false)
+    }
+  }
+
+  const handleSelectItem = (item: any) => {
+    // console.log('item  ===>  ', item);
+    setCategoryItems([item]);
+    setIsSearchValue(false);
+    setsearchCategoryItems([]);
+  }
+
+  const handleClose = (str: string) => {
+    setCategoryItems(Categories);
+    setIsSearchValue(false);
+    setsearchCategoryItems([]);
+  }
 
   return (
     <Fragment>
       <div className="body-container" style={{ width: getScreenWidth }}>
         <Container>
           <h4 className="movieList-header">New Release Items</h4>
-
-          <ItemListGrid movieCategories={movieCategories} />
-
+          <ItemInputSearchBox CategoryItems={Categories} handleInputValue={(val) => handleInput(val)} handleClose={(e) => handleClose(e)} />
+          <SearchBarItemList IsSearchValue={IsSearchValue} searchCetagoryList={searchCategoryItems} handleSelectItem={(item) => handleSelectItem(item)} />
+          <ItemListGrid movieCategories={CategoryItems} />
         </Container>
       </div>
     </Fragment>
