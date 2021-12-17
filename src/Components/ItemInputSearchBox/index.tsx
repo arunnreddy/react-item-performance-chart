@@ -11,9 +11,10 @@ type Props = {
     CategoryItems: any[];
     handleInputValue: (str: string) => any;
     handleClose: (str: string) => any;
+    SearchInputValue: string;
 }
 
-export const ItemInputSearchBox = ({ CategoryItems, handleInputValue, handleClose }: Props) => {
+export const ItemInputSearchBox = ({ CategoryItems, handleInputValue, handleClose, SearchInputValue }: Props) => {
     const [inputValue, setinputValue] = useState<string>('');
 
     const handleInput = (e: any) => {
@@ -31,7 +32,7 @@ export const ItemInputSearchBox = ({ CategoryItems, handleInputValue, handleClos
         >
             <InputBase
                 sx={{ ml: 1, flex: 1 }}
-                value={inputValue}
+                value={SearchInputValue ? SearchInputValue : inputValue}
                 placeholder="Search Category Items"
                 inputProps={{ 'aria-label': 'search google maps' }}
                 onChange={(e) => handleInput(e)}

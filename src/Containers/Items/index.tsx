@@ -18,6 +18,7 @@ const Items: React.FC = () => {
   const [searchCategoryItems, setsearchCategoryItems] = useState<any[]>([]);
   const [getScreenWidth, setGetScreenWidth] = useState<number>(window.innerWidth);
   const [IsSearchValue, setIsSearchValue] = useState<boolean>(false);
+  const [SearchInputValue, setSearchInputValue] = useState<string>('');
 
   useEffect(() => {
     window.addEventListener("resize", handleResize);
@@ -62,12 +63,14 @@ const Items: React.FC = () => {
     setCategoryItems([item]);
     setIsSearchValue(false);
     setsearchCategoryItems([]);
+    setSearchInputValue(item.title);
   }
 
   const handleClose = (str: string) => {
     setCategoryItems(Categories);
     setIsSearchValue(false);
     setsearchCategoryItems([]);
+    setSearchInputValue('');
   }
 
   return (
@@ -75,7 +78,7 @@ const Items: React.FC = () => {
       <div className="body-container" style={{ width: getScreenWidth }}>
         <Container>
           <h4 className="movieList-header">New Release Items</h4>
-          <ItemInputSearchBox CategoryItems={Categories} handleInputValue={(val) => handleInput(val)} handleClose={(e) => handleClose(e)} />
+          <ItemInputSearchBox CategoryItems={Categories} handleInputValue={(val) => handleInput(val)} handleClose={(e) => handleClose(e)} SearchInputValue={SearchInputValue} />
           <SearchBarItemList IsSearchValue={IsSearchValue} searchCetagoryList={searchCategoryItems} handleSelectItem={(item) => handleSelectItem(item)} />
           <ItemListGrid movieCategories={CategoryItems} />
         </Container>
