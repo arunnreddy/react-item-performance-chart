@@ -1,4 +1,4 @@
-import {Tooltip} from "@material-ui/core";
+import { Tooltip } from "@material-ui/core";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import './style.scss'
 
@@ -13,11 +13,7 @@ const defaultProps = {
   fontSize: 14,
 };
 
-export const TooltipMessage = ({
-  title,
-  arrow,
-  fontSize,
-}: Props & typeof defaultProps) => {
+export const TooltipMessage = ({title, arrow, fontSize,}: Props & typeof defaultProps) => {
   return (
     <div className="tooltip-container">
       <Tooltip title={title} arrow={arrow}>
