@@ -1,7 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { ApiUrl } from "./Url";
-interface PostData {
-}
+import  {ITodo}  from "./Type";
 
 const instance = axios.create({
 	baseURL: ApiUrl,

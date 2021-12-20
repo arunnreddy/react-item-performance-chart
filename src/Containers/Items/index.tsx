@@ -11,6 +11,9 @@ import TutorialDataService from "../../Api/ApiCall";
 import ItemListGrid from "../../Components/ItemListGrid";
 import { ItemInputSearchBox } from "../../Components/ItemInputSearchBox";
 import SearchBarItemList from "../../Components/SearchBarItemList";
+import { ITodo } from "../../Api/Type";
+import { useDispatch, useSelector } from "react-redux";
+import RootReducer from "../../Redux/Reducer";
 
 const Items: React.FC = () => {
   const [Categories, setCategories] = useState<any[]>([]);
@@ -20,7 +23,9 @@ const Items: React.FC = () => {
   const [IsSearchValue, setIsSearchValue] = useState<boolean>(false);
   const [SearchInputValue, setSearchInputValue] = useState<string>('');
 
-  useEffect(() => {
+  const ProductReducer = useSelector((state : any) => state.Product)
+
+  useEffect(() => {    
     window.addEventListener("resize", handleResize);
     return window.removeEventListener("resize", handleResize);
   }, [getScreenWidth]);
@@ -30,11 +35,14 @@ const Items: React.FC = () => {
   };
 
   useEffect(() => {
-    getCategoriesData();
-  }, []);
+    // getCategoriesData();
+    console.log('ProductReducer   ===> ',ProductReducer.products.todos);
+    setCategories(ProductReducer.products.todos);
+      setCategoryItems(ProductReducer.products.todos);
+  }, [ProductReducer.products.todos]);
 
   const getCategoriesData = () => {
-    TutorialDataService.getAll().then(res => {
+    TutorialDataService.getAll().then((res: ITodo) => {
       console.log('Response data ==> ', res.data);
       setCategories(res.data);
       setCategoryItems(res.data);
