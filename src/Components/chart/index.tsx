@@ -149,9 +149,7 @@ function Chart() {
                         <p className="col-value-header">{chartData.data.regions[0].facilities[0].totalAggregations.totalConsumptionSavings}thm <span className="col-value-header-span">{chartData.data.regions[0].facilities[0].totalAggregations.totalConsumptionSavingsPercentage}%</span></p> 
                         <p className="col-header-name">Savings</p>
                     </div>
-                    <div className="col-row-innerContainer-blank">
-                        
-                    </div>
+                   
                     <div className="col-row-innerContainer">
                         <p className="col-value-header">${chartData.data.regions[0].facilities[0].totalAggregations.totalActualCost}</p>
                         <p className="col-header-name">Actual Cost</p>
